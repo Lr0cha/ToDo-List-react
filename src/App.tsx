@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import InputTasks from "./components/InputTasks";
 import ViewTasks from "./components/ViewTasks";
 
 const App = () => {
   const [tasks, setTasks] = useState<string[]>([]); //lista de tarefas
+  const firstRender = useRef(true);
 
   function handleAddTask(task: string) {
     setTasks([...tasks, task]);
@@ -15,6 +16,21 @@ const App = () => {
     );
     setTasks(newListTask);
   }
+
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("TODO");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    localStorage.setItem("TODO", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <div className="bg-gray-300 min-h-screen">
