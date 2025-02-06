@@ -1,5 +1,5 @@
 import { FaCheck } from "react-icons/fa";
-
+import toDoImage from "../assets/toDoImage.svg";
 interface Task {
   text: string;
   completed: boolean;
@@ -19,7 +19,7 @@ const ViewTasks = ({ tasks, delTask, toggleTask }: TasksProps) => {
           <div
             key={index}
             className={`flex items-center justify-between p-4 rounded-lg shadow-md ${
-              task.completed ? "bg-green-100 line-through" : "bg-gray-100"
+              task.completed ? "bg-green-100" : "bg-gray-100"
             }`}
           >
             <div className="flex items-center space-x-4">
@@ -29,7 +29,13 @@ const ViewTasks = ({ tasks, delTask, toggleTask }: TasksProps) => {
               >
                 <FaCheck className="text-xl" />
               </button>
-              <p className="flex-grow text-lg text-gray-700">{task.text}</p>
+              <p
+                className={`flex-grow text-lg text-gray-700 ${
+                  task.completed ? "line-through" : ""
+                }`}
+              >
+                {task.text}
+              </p>
             </div>
             <button
               onClick={() => delTask(index)}
@@ -41,7 +47,7 @@ const ViewTasks = ({ tasks, delTask, toggleTask }: TasksProps) => {
         ))
       ) : (
         <img
-          src="src/assets/toDoImage.svg"
+          src={toDoImage}
           className="mx-auto w-2/3 pt-10"
           alt="Carregando..."
         />
