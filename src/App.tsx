@@ -13,6 +13,7 @@ const App = () => {
 
   function handleAddTask(task: string) {
     setTasks([...tasks, { text: task, completed: false }]);
+    console.log("pronto");
   }
 
   function handleDelTask(index: number) {
@@ -46,7 +47,7 @@ const App = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen p-6 flex items-center justify-center">
-      <div className="bg-white w-full max-w-xl p-6 rounded-lg shadow-lg">
+      <div className="bg-white w-full max-w-xl 2xl:max-w-4xl p-6 rounded-lg shadow-lg">
         <h1 className="text-4xl text-center font-bold text-gray-700 mb-6">
           TODO LIST
         </h1>
